@@ -35,12 +35,13 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public getUserDTO getUser(@PathParam("id") long id) {
-    	logger.debug("Requested user " + id);
+    	logger.info("Requested user " + id);
     	IdentifiedUser u = idr.findById(id);
-    	logger.debug("Found " + u.toString());
+    	logger.info("Found " + u.toString());
     	logger.info(u);
         getUserDTO ret = userFetchMapper.toResource(u.getUser());
         ret.setId(id);
+        logger.info(ret);
         return ret;
     }
     

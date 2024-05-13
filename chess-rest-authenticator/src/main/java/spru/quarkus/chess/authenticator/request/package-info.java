@@ -1,0 +1,1 @@
+package spru.quarkus.chess.authenticator.request;

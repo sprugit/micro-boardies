@@ -4,20 +4,30 @@ import java.sql.Timestamp;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+import jakarta.json.bind.annotation.JsonbNillable;
 import jakarta.json.bind.annotation.JsonbProperty;
 
-@Schema(description = "Retrieved user")
+@Schema(description = "Fetch Other User Profile Data")
 public class getUserDTO {
 	
 	@JsonbProperty
+	@Schema(required = true, nullable = false)
 	private long id;
 	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	private String first_name;
 	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	private String last_name;
 	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	private String nickname;
 	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	private Timestamp last_online;
 	
 	public void getUser() {
@@ -63,4 +73,9 @@ public class getUserDTO {
 		this.last_online = last_online;
 	}
 
+	@Override
+	public String toString() {
+		return "getUserDTO [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", nickname="
+				+ nickname + ", last_online=" + last_online + "]";
+	}
 }

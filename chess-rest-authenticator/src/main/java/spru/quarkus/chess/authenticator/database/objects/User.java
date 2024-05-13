@@ -2,6 +2,11 @@ package spru.quarkus.chess.authenticator.database.objects;
 
 import java.sql.Timestamp;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import jakarta.json.bind.annotation.JsonbNillable;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,34 +15,55 @@ import spru.quarkus.chess.authenticator.utils.PasswordHasher;
 
 @Entity
 @Table(name = "users")
+@Schema(description = "Fetch Own User Data")
 public class User {
 	
 	@Id
 	@Column(name = "EMAIL", length = 254, nullable = false)
+	@JsonbProperty
+	@Schema(required = true, nullable = false)
 	public String email;
 	
 	@Column(name = "USERNAME", length = 50, nullable = false)
+	@JsonbProperty
+	@Schema(required = true, nullable = false)
 	public String username;
 	
 	@Column(name = "PASSWORD", length = 50, nullable = false)
+	@JsonbProperty
+	@Schema(required = true, nullable = false)
 	public String password;
 	
 	@Column(name = "FIRST_NAME", length = 50, nullable = true)
+	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	public String first_name;
 	
 	@Column(name = "LAST_NAME", length = 50, nullable = true)
+	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	public String last_name;
 	
 	@Column(name = "SALT", length = 50, nullable = false)
+	@JsonbTransient
 	public String salt;
 	
 	@Column(name = "REGISTERED", nullable = false)
+	@JsonbTransient
 	public Timestamp registered;
 	
 	@Column(name = "LAST_ONLINE", nullable = true)
+	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	public Timestamp last_online;
 	
 	@Column(name = "NICKNAME", length = 50, nullable = true)
+	@JsonbProperty
+	@JsonbNillable
+	@Schema(required = true, nullable = true)
 	public String nickname;
 	
 	public User() {
